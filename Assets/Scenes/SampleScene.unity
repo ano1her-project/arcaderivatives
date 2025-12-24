@@ -269,6 +269,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a472149ea91133f4b8911ae3bffa22b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  derivativeCount: 0
-  pastSliceCount: 0
-  controlledDerivativeIndex: 0
+  derivativeCount: 5
+  controlledDerivativeIndex: 2

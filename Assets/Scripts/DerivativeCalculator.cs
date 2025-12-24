@@ -6,45 +6,39 @@ public class DerivativeCalculator : MonoBehaviour
 {
     public static DerivativeCalculator instance;
     public int derivativeCount;
-    public int pastSliceCount;
     public int controlledDerivativeIndex;
-    List<float[]> derivativeHistory = new(); // a fixed-size rolling buffer
-                                             // each array contains all derivatives for a single frame
+    float[] prevValues;
+
     void Start()
     {
         DerivativeCalculator.instance = this;
         //
-        for (int i = 0; i < pastSliceCount; i++)
-            derivativeHistory.Add(new float[derivativeCount]);
-        //
-        SetControlledDerivative(2, true);
+        prevValues = new float[derivativeCount];
     }
 
     void FixedUpdate()
     {
-        // pastSlices = {3 frames ago; 2 frames ago; 1 frame ago}
+        SetControlledDerivative(2, true);
 
-        float[] currentSlice = new float[derivativeCount];
+        float[] currentValues = new float[derivativeCount];
         // current value of the controlled derivative
-        currentSlice[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value; 
+        currentValues[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value; 
         // differentiate
         for (int i = controlledDerivativeIndex + 1; i < derivativeCount; i++)
-            currentSlice[i] = (currentSlice[i - 1] - derivativeHistory[0][i - 1]) / (Time.deltaTime * pastSliceCount);
+            currentValues[i] = (currentValues[i - 1] - prevValues[i - 1]) / Time.deltaTime;
         // integrate
         for (int i = controlledDerivativeIndex - 1; i >= 0; i--)
-            currentSlice[i] = derivativeHistory[^1][i] + currentSlice[i + 1] * Time.deltaTime;
+            currentValues[i] = prevValues[i] + currentValues[i + 1] * Time.deltaTime;
         // advance history
-        derivativeHistory.Add(currentSlice); // add the new slice
-        derivativeHistory.RemoveAt(0); // and remove the oldest one.
-
-        // pastSlices = {2 frames ago; 1 frame ago; this frame}
+        for (int i = 0; i < derivativeCount; i++)
+            prevValues[i] = currentValues[i];
 
         // update non-controlled sliders:
         for (int i = 0; i < derivativeCount; i++)
         {
             if (i == controlledDerivativeIndex)
                 continue;
-            SliderSpawner.instance.handles[i].SetValue(currentSlice[i], true);
+            SliderSpawner.instance.handles[i].SetValue(currentValues[i], true);
         }
     }
 
