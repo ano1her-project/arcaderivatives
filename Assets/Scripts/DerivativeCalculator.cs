@@ -7,6 +7,7 @@ public class DerivativeCalculator : MonoBehaviour
     public static DerivativeCalculator instance;
     public int derivativeCount;
     public int controlledDerivativeIndex;
+    //public float lerp;
     float[] prevValues;
 
     void Start()
@@ -22,7 +23,7 @@ public class DerivativeCalculator : MonoBehaviour
 
         float[] currentValues = new float[derivativeCount];
         // current value of the controlled derivative
-        currentValues[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value; 
+        currentValues[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value;
         // differentiate
         for (int i = controlledDerivativeIndex + 1; i < derivativeCount; i++)
             currentValues[i] = (currentValues[i - 1] - prevValues[i - 1]) / Time.deltaTime;

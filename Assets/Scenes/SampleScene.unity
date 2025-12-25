@@ -271,4 +271,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   derivativeCount: 5
   controlledDerivativeIndex: 2
-  lerp: 0.01
+  lerp: 0.5

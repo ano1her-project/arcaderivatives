@@ -6,6 +6,7 @@ public class SliderHandle : MonoBehaviour
 {
     public float max;
     public bool draggable;
+    public bool clamp;
     bool dragging;
     public float value;
 
@@ -33,7 +34,8 @@ public class SliderHandle : MonoBehaviour
 
     public void SetValue(float p_value, bool external)
     {
-        //value = Mathf.Clamp(p_value, -max, max);
+        if (clamp)
+            p_value = Mathf.Clamp(p_value, -max, max);
         value = p_value;
         transform.position = transform.parent.position + Vector3.right * value; // assuming that position and value are 1:1
         if (external && draggable)

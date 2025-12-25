@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max: 5
   draggable: 1
+  clamp: 1
   value: 0
 --- !u!1 &379391327047556939
 GameObject:
