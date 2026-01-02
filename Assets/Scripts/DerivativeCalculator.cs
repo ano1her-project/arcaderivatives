@@ -1,3 +1,6 @@
+// TODO: smooth out integration, whether thats gonna be by lerping or blurring the slider handles
+// for now, im choosing to focus on literally everything else, as integration is just kinda visual
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +22,11 @@ public class DerivativeCalculator : MonoBehaviour
 
     void FixedUpdate()
     {
-        SetControlledDerivative(2, true);
+        SetControlledDerivative(0, true);
 
         float[] currentValues = new float[derivativeCount];
         // current value of the controlled derivative
-        currentValues[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value;
+        currentValues[controlledDerivativeIndex] = SliderSpawner.instance.handles[controlledDerivativeIndex].value; /*currentValues[controlledDerivativeIndex] = Time.time;*/
         // differentiate
         for (int i = controlledDerivativeIndex + 1; i < derivativeCount; i++)
             currentValues[i] = (currentValues[i - 1] - prevValues[i - 1]) / Time.deltaTime;
