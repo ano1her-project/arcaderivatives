@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SliderHandle : MonoBehaviour
 {
-    public float max;
+    public float visualMax;
+    public float valueToPosRatio;
     public bool draggable;
-    public bool clamp;
+    public bool visualClamp;
     bool dragging;
     public float value;
+    public List<LinkWithSlider> links = new();
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class SliderHandle : MonoBehaviour
         if (!dragging)
             return;
         var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        SetValue(mouseWorldPos.x, false);
+        SetValue(mouseWorldPos.x * valueToPosRatio, false);
     }
 
     void OnMouseDown() // the mouse is pressed while over this collider
@@ -34,10 +36,12 @@ public class SliderHandle : MonoBehaviour
 
     public void SetValue(float p_value, bool external)
     {
-        if (clamp)
-            p_value = Mathf.Clamp(p_value, -max, max);
+        if (visualClamp)
+            p_value = Mathf.Clamp(p_value, -visualMax, visualMax);
         value = p_value;
-        transform.position = transform.parent.position + Vector3.right * value; // assuming that position and value are 1:1
+        transform.position = transform.parent.position + Vector3.right * value / valueToPosRatio;
+        foreach (var link in links)
+            link.UpdatePosition(value / valueToPosRatio);
         if (external && draggable)
             Debug.Log("A draggable slider handle is being overriden!");
     }
