@@ -222,6 +222,8 @@ GameObject:
   - component: {fileID: 1050608538}
   - component: {fileID: 1050608537}
   - component: {fileID: 1050608539}
+  - component: {fileID: 1050608540}
+  - component: {fileID: 1050608541}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -312,6 +314,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   derivativeIndex: 0
+--- !u!114 &1050608540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050608536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa423c5d8ede9d944b9d0c894ac6cedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDirection: 1
+--- !u!114 &1050608541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050608536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc3100402fc974ba868873f2351768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletVelocity: 5
+  gunfireInterval: 0.1
 --- !u!1 &1220258482
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +352,7 @@ GameObject:
   - component: {fileID: 1220258484}
   - component: {fileID: 1220258483}
   - component: {fileID: 1220258485}
+  - component: {fileID: 1220258486}
   m_Layer: 0
   m_Name: ScriptHoarder
   m_TagString: Untagged
@@ -385,6 +415,20 @@ MonoBehaviour:
   - 5.5
   - 5.5
   - 5.5
+--- !u!114 &1220258486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220258482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7076158b45addb5468b0e76da6282aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1228061192088839016, guid: 9a4b25546b249bc4e86d2b53fa5f3bc1, type: 3}
+  enemyPrefab: {fileID: 1357522802831361683, guid: ac7ca441f49201b4aa198c2078d1f9f3, type: 3}
 --- !u!1 &2090434179
 GameObject:
   m_ObjectHideFlags: 0
