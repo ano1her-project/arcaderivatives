@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletVelocity: 5
-  gunfireInterval: 0.1
+  gunfireInterval: 0.25
 --- !u!1 &1220258482
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 1220258483}
   - component: {fileID: 1220258485}
   - component: {fileID: 1220258486}
+  - component: {fileID: 1220258487}
   m_Layer: 0
   m_Name: ScriptHoarder
   m_TagString: Untagged
@@ -429,6 +430,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1228061192088839016, guid: 9a4b25546b249bc4e86d2b53fa5f3bc1, type: 3}
   enemyPrefab: {fileID: 1357522802831361683, guid: ac7ca441f49201b4aa198c2078d1f9f3, type: 3}
+--- !u!114 &1220258487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220258482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1c2dba88d5d624dbb8a3308f5f763c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yPos: 0
+  xBounds: 0
 --- !u!1 &2090434179
 GameObject:
   m_ObjectHideFlags: 0
