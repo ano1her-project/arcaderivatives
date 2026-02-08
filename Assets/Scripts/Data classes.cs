@@ -136,7 +136,7 @@ public class SpacingGenerator
     {
         float[] xs = new float[count];
         float x = -walls - objWidth / 2f;
-        float xIncrement = 2 * walls / (count + 1) - count / (count + 1) * objWidth + objWidth; // just trust me bro
+        float xIncrement = 2 * walls / (count + 1) + objWidth / (count + 1); // just trust me bro
         for (int i = 0; i < count; i++)
         {
             x += xIncrement;
