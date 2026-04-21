@@ -118,7 +118,7 @@ public class EnemyWaveData
     }
 }
 
-public class SpacingGenerator
+public static class SpacingGenerator
 {
     /*public static float[] GetSpacedXs(int count, float bounds)
     // probably just use the one below, idk when you'd want to use this one
