@@ -152,13 +152,3 @@ public static class SpacingGenerator
         return xs;
     }
 }
-
-public static class Extensions
-{
-    public static T[] Repeat<T>(this T obj, int count)
-    {
-        T[] result = new T[count];
-        System.Array.Fill(result, obj);
-        return result;
-    }
-}
