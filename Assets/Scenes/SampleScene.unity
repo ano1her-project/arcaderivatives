@@ -442,8 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1c2dba88d5d624dbb8a3308f5f763c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yPos: 3
+  yPos: 5
   xBounds: 6.5
+  unarmedSprite: {fileID: -4782159022864198514, guid: 9fce65ca98271654e999493e23be039e, type: 3}
 --- !u!1 &2090434179
 GameObject:
   m_ObjectHideFlags: 0
