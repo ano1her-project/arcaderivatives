@@ -63,14 +63,17 @@ public class EnemyWaveData
 {
     public EnemyData[] enemies;
     public float[] xs;
+    //
+    public int intensity;
 
-    public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs)
+    public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs, int p_intensity)
     {
         enemies = p_enemies;
         xs = p_xs;
+        intensity = p_intensity;
     }
 
-    public static EnemyWaveData FromEnemyAmongFiller(EnemyData enemy, EnemyData filler, float[] xs)
+    public static EnemyWaveData FromEnemyAmongFiller(EnemyData enemy, EnemyData filler, float[] xs, int intensity)
     {
         EnemyData[] enemies = new EnemyData[xs.Length];
         enemies[Random.Range(0, xs.Length)] = enemy; // the one non-filler enemy
@@ -79,10 +82,10 @@ public class EnemyWaveData
             if (enemies[i] is null)
                 enemies[i] = filler;
         }
-        return new(enemies, xs);
+        return new(enemies, xs, intensity);
     }
 
-    public static EnemyWaveData FromEnemiesAmongFiller(EnemyData[] nonFillerEnemies, EnemyData filler, float[] xs)
+    public static EnemyWaveData FromEnemiesAmongFiller(EnemyData[] nonFillerEnemies, EnemyData filler, float[] xs, int intensity)
     {
         EnemyData[] enemies = new EnemyData[xs.Length];
         List<int> vacantIndexes = new();
@@ -101,7 +104,7 @@ public class EnemyWaveData
             if (enemies[i] is null)
                 enemies[i] = filler;
         }
-        return new(enemies, xs);
+        return new(enemies, xs, intensity);
     }
 
     public GameObject[] Spawn(float yPos)
