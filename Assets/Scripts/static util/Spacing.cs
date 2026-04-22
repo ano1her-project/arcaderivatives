@@ -24,7 +24,7 @@ public static class Spacing
     // the distance between the wall and the first ship is not even considered
     {
         float[] xs = new float[count];
-        float x = -((count + 1) * increment) / 2f;
+        float x = -((count - 1) * increment) / 2f;
         for (int i = 0; i < count; i++)
         {
             xs[i] = x;
