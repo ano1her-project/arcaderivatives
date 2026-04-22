@@ -1,64 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletData
-{
-    public static GameObject prefab;
-
-    public float velocity;
-
-    public BulletData(float p_velocity)
-    {
-        velocity = p_velocity;
-    }
-
-    public void Spawn(Vector3 position, float direction)
-    {
-        var inst = Object.Instantiate(prefab, position, Quaternion.identity);
-        inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * velocity * direction;
-    }
-}
-
-public class GunData
-{
-    public BulletData bullet;
-    public float interval;
-
-    public GunData(BulletData p_bullet, float p_interval)
-    {
-        bullet = p_bullet;
-        interval = p_interval;
-    }
-}
-
-public class EnemyData
-{
-    public static GameObject prefab;
-
-    public Sprite sprite;
-    public GunData? gun;
-    public float velocity;
-
-    public EnemyData(Sprite p_sprite, GunData? p_gun, float p_velocity)
-    {
-        sprite = p_sprite;
-        gun = p_gun;
-        velocity = p_velocity;
-    }
-
-    public GameObject Spawn(Vector3 position)
-    {
-        var inst = GameObject.Instantiate(prefab, position, Quaternion.identity);
-        inst.GetComponent<SpriteRenderer>().sprite = sprite;
-        inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * velocity;
-        if (gun is null)
-            Object.Destroy(inst.GetComponent<ShipGun>());
-        else
-            inst.GetComponent<ShipGun>().data = gun;
-        return inst;
-    }
-}
-
 public class EnemyWaveData
 {
     public EnemyData[] enemies;
