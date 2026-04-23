@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 379391325776796786}
   - component: {fileID: 379391325776796785}
   - component: {fileID: 379391325776796784}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   draggable: 1
   visualClamp: 0
   value: 0
+  links: []
 --- !u!1 &379391327047556939
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 379391327047556932}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7675839737933007299}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -29,4 +29,9 @@ public class LinkWithSlider : MonoBehaviour
     {
         transform.position = origin + Vector3.right * position;
     }
+
+    void OnDestroy()
+    {
+        SliderSpawner.instance.handles[derivativeIndex].links.Remove(this);
+    }
 }
