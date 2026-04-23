@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // enemy catalogue:
         unarmed = new(unarmedSprite, null, 0.6f);
-        cannon = new(cannonSprite, new(new(4f), 1.8f), 0.6f);
+        cannon = new(cannonSprite, new(new(5f), 1f), 0.6f);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
             new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 0), //  O O O O

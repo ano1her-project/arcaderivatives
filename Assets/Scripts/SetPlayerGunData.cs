@@ -10,6 +10,6 @@ public class SetPlayerGunData : MonoBehaviour
 
     void Start()
     {
-        GetComponent<ShipGun>().data = new GunData(new BulletData(bulletVelocity), gunfireInterval);
+        GetComponent<PlayerGun>().data = new(new(bulletVelocity), gunfireInterval);
     }
 }

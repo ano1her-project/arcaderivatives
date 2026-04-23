@@ -21,9 +21,9 @@ public class EnemyData
         inst.GetComponent<SpriteRenderer>().sprite = sprite;
         inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * velocity;
         if (gun is null)
-            Object.Destroy(inst.GetComponent<ShipGun>());
+            Object.Destroy(inst.GetComponent<AutoGun>());
         else
-            inst.GetComponent<ShipGun>().data = gun;
+            inst.GetComponent<AutoGun>().data = gun;
         return inst;
     }
 }

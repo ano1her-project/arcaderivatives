@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShipGun : MonoBehaviour
+public class AutoGun : MonoBehaviour
 {
     public GunData data;
     public float bulletDirection;
