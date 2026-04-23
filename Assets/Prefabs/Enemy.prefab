@@ -175,4 +175,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa423c5d8ede9d944b9d0c894ac6cedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDirection: 0
+  bulletDirection: -1

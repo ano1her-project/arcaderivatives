@@ -14,6 +14,6 @@ public class BulletData
     public void Spawn(Vector3 position, float direction)
     {
         var inst = Object.Instantiate(prefab, position, Quaternion.identity);
-        inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * velocity * direction;
+        inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * (velocity * direction);
     }
 }
