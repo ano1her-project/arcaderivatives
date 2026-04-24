@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public float xBounds;
     public float intervalBetweenWaves;
 
+    public Sprite bulletSprite;
     public Sprite unarmedSprite, cannonSprite;
 
     // enemy pool: // waves built from enemies are hardcoded and not random, so there'd be no use for an array and i simply name them as separate variables.
@@ -20,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // enemy catalogue:
         unarmed = new(unarmedSprite, null, 0.6f);
-        cannon = new(cannonSprite, new(new(5f), 1f), 0.6f);
+        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 0.6f);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
             new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 0), //  O O O O

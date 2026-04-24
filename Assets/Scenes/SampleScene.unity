@@ -415,6 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebb9c95e23b2e44aa68284fd4c99e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSprite: {fileID: 21300000, guid: f08e53fd56ba5b04e993ee87744582b0, type: 3}
+  bulletRadius: 0.5
   bulletVelocity: 10
   gunfireInterval: 0.3
 --- !u!114 &1050608546
@@ -533,6 +535,7 @@ MonoBehaviour:
   yPos: 5
   xBounds: 6.5
   intervalBetweenWaves: 2.5
+  bulletSprite: {fileID: 21300000, guid: 66773b897024bcb40b095c0ef0068ee5, type: 3}
   unarmedSprite: {fileID: -4782159022864198514, guid: 9fce65ca98271654e999493e23be039e, type: 3}
   cannonSprite: {fileID: 4151574863379639793, guid: a39007f41e3cbda4c91d395cc4629dab, type: 3}
 --- !u!1 &2090434179
