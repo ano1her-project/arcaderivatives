@@ -21,7 +21,7 @@ public class DerivativeCalculator : MonoBehaviour
 
     void Start()
     {
-        DerivativeCalculator.instance = this;
+        instance = this;
         //
         prevValues = new float[derivativeCount];
     }

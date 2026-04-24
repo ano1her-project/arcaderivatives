@@ -4,9 +4,11 @@ public class Level
     public intmaxIntensity;*/
 
     public int[] waveIntensities;
+    public int controlledDerivativeIndex;
 
-    public Level(int[] p_waveIntensities)
+    public Level(int[] p_waveIntensities, int p_controlledDerivativeIndex)
     {
         waveIntensities = p_waveIntensities;
+        controlledDerivativeIndex = p_controlledDerivativeIndex;
     }
 }

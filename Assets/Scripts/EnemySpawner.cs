@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner instance;
+
     public float yPos;
     public float xBounds;
     public float intervalBetweenWaves;
@@ -14,11 +17,11 @@ public class EnemySpawner : MonoBehaviour
     EnemyData unarmed, cannon, turret;
     // wave pool:  // levels built from waves, however, are built by picking waves from a set randomly, so there needs to be a pool array.
     EnemyWaveData[] wavePool;
-    // levels:
-    Level[] levels;
+    // levels are built in the GameManager
 
     void Start()
     {
+        instance = this;
         // enemy catalogue:
         unarmed = new(unarmedSprite, null, 0.6f);
         cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 0.6f);
@@ -29,19 +32,13 @@ public class EnemySpawner : MonoBehaviour
             new(cannon.Repeat(5), Spacing.FromSetIncrement(5, 2f), 1),
             new(turret.Repeat(5), Spacing.FromSetIncrement(5, 2f), 2),
         };
-        // levels:
-        levels = new Level[] {
-            new(new int[] {0, 1, 2, 0, 1, 2})
-        };
-        //
-        StartLevel();
     }
 
-    EnemyWaveData? lastWave;
+    EnemyWaveData? lastWave; // last as in previous
     int currentWave;
     float scheduledWaveSpawn;
 
-    void StartLevel()
+    public void SpawnLevel()
     {
         currentWave = 0;
         scheduledWaveSpawn = Time.time + intervalBetweenWaves;
@@ -52,10 +49,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Time.time < scheduledWaveSpawn)
             return;
-        if (currentWave >= levels[GameManager.level].waveIntensities.Length)
+        var level = GameManager.instance.GetCurrentLevel();
+        if (currentWave >= level.waveIntensities.Length)
             return;
         var wave = wavePool
-            .Where(wave => wave.intensity == levels[GameManager.level].waveIntensities[currentWave]
+            .Where(wave => wave.intensity == level.waveIntensities[currentWave]
             && (lastWave is null || wave != lastWave))
             .ToArray().ChooseRandom();
         wave.Spawn(yPos);        
