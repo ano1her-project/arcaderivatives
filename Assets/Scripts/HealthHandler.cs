@@ -20,6 +20,11 @@ public class HealthHandler : MonoBehaviour
             return;
         if (!other.TryGetComponent<HealthHandler>(out _))
             Destroy(other.gameObject);
+        TakeDamage();
+    }
+
+    public void TakeDamage()
+    {
         lives--;
         if (lives <= 0)
             Destroy(gameObject);
