@@ -623,6 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1220258484}
+  - component: {fileID: 1220258488}
   - component: {fileID: 1220258483}
   - component: {fileID: 1220258485}
   - component: {fileID: 1220258486}
@@ -722,6 +723,19 @@ MonoBehaviour:
   unarmedSprite: {fileID: 21300000, guid: 25bdd3a02a64d73478647a9f39956fe1, type: 3}
   cannonSprite: {fileID: 21300000, guid: 96d86580350222d49bd0ef2c5a231150, type: 3}
   turretSprite: {fileID: 21300000, guid: 1e3bc73fe9d9adf4082768c56499a0a3, type: 3}
+--- !u!114 &1220258488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220258482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbe709d1a44cbe438c0f6d6ab2dcb6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelIndex: -1
 --- !u!1 &2090434179
 GameObject:
   m_ObjectHideFlags: 0
