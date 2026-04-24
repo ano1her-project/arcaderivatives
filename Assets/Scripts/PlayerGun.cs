@@ -16,7 +16,7 @@ public class PlayerGun : MonoBehaviour
     {
         if (shootAction.IsPressed() && Time.time >= lastFireTime + data.interval)
         {
-            data.bullet.Spawn(transform.position + Vector3.up * 0.5f, 1f, gameObject.tag);
+            data.bullet.Spawn(transform.position + Vector3.up * 0.5f, 90f, gameObject.tag);
             lastFireTime = Time.time;
         }
     }

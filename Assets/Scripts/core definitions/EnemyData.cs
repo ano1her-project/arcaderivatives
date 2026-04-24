@@ -26,7 +26,7 @@ public class EnemyData
 
     public GameObject Spawn(Vector3 position)
     {
-        var inst = GameObject.Instantiate(prefab, position, Quaternion.identity);
+        var inst = GameObject.Instantiate(prefab, position, Quaternion.Euler(0f, 0f, -90f));
         inst.GetComponent<SpriteRenderer>().sprite = sprite;
         inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * velocity;
         // individual components

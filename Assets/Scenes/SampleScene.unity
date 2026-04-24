@@ -719,8 +719,9 @@ MonoBehaviour:
   xBounds: 6.5
   intervalBetweenWaves: 2.5
   bulletSprite: {fileID: 21300000, guid: 66773b897024bcb40b095c0ef0068ee5, type: 3}
-  unarmedSprite: {fileID: -4782159022864198514, guid: 9fce65ca98271654e999493e23be039e, type: 3}
-  cannonSprite: {fileID: 4151574863379639793, guid: a39007f41e3cbda4c91d395cc4629dab, type: 3}
+  unarmedSprite: {fileID: 21300000, guid: 9fce65ca98271654e999493e23be039e, type: 3}
+  cannonSprite: {fileID: 21300000, guid: a39007f41e3cbda4c91d395cc4629dab, type: 3}
+  turretSprite: {fileID: 21300000, guid: 1e3bc73fe9d9adf4082768c56499a0a3, type: 3}
 --- !u!1 &2090434179
 GameObject:
   m_ObjectHideFlags: 0

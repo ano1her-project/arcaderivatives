@@ -8,10 +8,10 @@ public class EnemySpawner : MonoBehaviour
     public float intervalBetweenWaves;
 
     public Sprite bulletSprite;
-    public Sprite unarmedSprite, cannonSprite;
+    public Sprite unarmedSprite, cannonSprite, turretSprite;
 
     // enemy pool: // waves built from enemies are hardcoded and not random, so there'd be no use for an array and i simply name them as separate variables.
-    EnemyData unarmed, cannon;
+    EnemyData unarmed, cannon, turret;
     // wave pool:  // levels built from waves, however, are built by picking waves from a set randomly, so there needs to be a pool array.
     EnemyWaveData[] wavePool;
     // levels:
@@ -22,18 +22,16 @@ public class EnemySpawner : MonoBehaviour
         // enemy catalogue:
         unarmed = new(unarmedSprite, null, 0.6f);
         cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 0.6f);
+        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 0.6f, true);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
-            new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 0), //  O O O O
-            new(unarmed.Repeat(5), Spacing.FromSetIncrement(5, 2f), 0), // O O O O O
-            new(unarmed.Repeat(2).And(cannon).And(unarmed.Repeat(2)), Spacing.FromSetIncrement(5, 2f), 1), // O O V O O 
-            new(cannon.And(unarmed.Repeat(4)), Spacing.FromSetIncrement(5, 2f), 1), // V O O O O
-            new(unarmed.Repeat(4).And(cannon), Spacing.FromSetIncrement(5, 2f), 1), // O O O O V
-            new(cannon.And(unarmed.Repeat(3)).And(cannon), Spacing.FromSetIncrement(5, 2f), 2), // V O O O V
+            new(unarmed.Repeat(5), Spacing.FromSetIncrement(5, 2f), 0),
+            new(cannon.Repeat(5), Spacing.FromSetIncrement(5, 2f), 1),
+            new(turret.Repeat(5), Spacing.FromSetIncrement(5, 2f), 2),
         };
         // levels:
         levels = new Level[] {
-            new(new int[] {0, 0, 1, 2, 3, 1, 2, 3})
+            new(new int[] {0, 1, 2, 0, 1, 2})
         };
         //
         StartLevel();
