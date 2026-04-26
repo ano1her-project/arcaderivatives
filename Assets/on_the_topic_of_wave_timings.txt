@@ -1,0 +1,11 @@
+In my head, I've had two ideas of how the EnemySpawner would work:
+1. the screen starts off empty and every n seconds, a new wave spawns.
+2. a vivid image of a screen containing two or three waves.
+
+It is only today (25.04.26) that I'm realizing these two ideas are contradictory.
+If a wave with, say, 5 enemies spawns every 2 seconds, the player must kill 2.5 enemies per second.
+Any less and they will slowly but surely be overwhelmed. Any more and they will have downtime when no enemies will be on screen.
+However, if the enemies spawn at a constant, steady, never-changing rate, there can only be one wave (and, therefore, <5 enemies) on screen.
+
+The most obvious way to fix this - off of the top of my head - is to spawn a few waves in quick succession at the beginning of the level.
+Whether more are spawned later on is not as consquential.

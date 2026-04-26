@@ -22,21 +22,22 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         instance = this;
+        // dev info
+        Debug.Log($"a ship with speed {1f}m/s will take {(yPos - 1) / 1f}s to reach the player and {yPos / 1f}s to reach the player-side bounds. it will travel {1f * intervalBetweenWaves}m before the next wave spawns.");
         // enemy catalogue:
-        unarmed = new(unarmedSprite, null, 0.6f);
-        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 0.6f);
-        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 0.6f, true);
+        unarmed = new(unarmedSprite, null, 1f);
+        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 1f);
+        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 1f, true);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
+            new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 0),
             new(unarmed.Repeat(5), Spacing.FromSetIncrement(5, 2f), 0),
-            new(cannon.Repeat(5), Spacing.FromSetIncrement(5, 2f), 1),
-            new(turret.Repeat(5), Spacing.FromSetIncrement(5, 2f), 2),
         };
     }
 
     EnemyWaveData? lastWave; // last as in previous
     int currentWave;
-    float scheduledWaveSpawn;
+    float scheduledWaveSpawn = float.MaxValue;
 
     public void SpawnLevel()
     {
