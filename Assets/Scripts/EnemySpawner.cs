@@ -23,11 +23,12 @@ public class EnemySpawner : MonoBehaviour
     {
         instance = this;
         // dev info
-        Debug.Log($"a ship with speed {1f}m/s will take {(yPos - 1) / 1f}s to reach the player and {yPos / 1f}s to reach the player-side bounds.");
+        float exampleSpeed = 2f / 3f;
+        Debug.Log($"a ship with speed {exampleSpeed}m/s will take {(yPos - 1) / exampleSpeed}s to reach the player and {yPos / exampleSpeed}s to reach the player-side bounds.");
         // enemy catalogue:
-        unarmed = new(unarmedSprite, null, 1f);
-        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 1f);
-        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 1f, true);
+        unarmed = new(unarmedSprite, null, 2f / 3f);
+        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 2f / 3f);
+        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 2f / 3f, true);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
             new(unarmed.Repeat(3), Spacing.FromSetIncrement(3, 2f), 0),
@@ -63,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
             && (lastWave is null || wave != lastWave))
             .ToArray().ChooseRandom();
         wave.Spawn(isInStartPhase ? 
-            yPos - (level.startWaveIntensities.Length - 1 - currentWave) * 1f : 
+            yPos - (level.startWaveIntensities.Length - 1 - currentWave) * 2f : 
             yPos);        
         currentWave++;
         if (isInStartPhase && currentWave >= level.startWaveIntensities.Length)

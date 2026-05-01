@@ -1,3 +1,5 @@
+/// Chapter 1 (25.04.26)
+
 In my head, I've had two ideas of how the EnemySpawner would work:
 1. the screen starts off empty and every n seconds, a new wave spawns.
 2. a vivid image of a screen containing two or three waves.
@@ -9,3 +11,33 @@ However, if the enemies spawn at a constant, steady, never-changing rate, there 
 
 The most obvious way to fix this - off of the top of my head - is to spawn a few waves in quick succession at the beginning of the level.
 Whether more are spawned later on is not as consquential.
+
+
+/// Chapter 2 (01.05.26)
+
+If the player can fire a shot every f seconds and a wave contains, on average, n enemies, waves should spawn every w = n*f seconds to be in equillibrium with the player.		// f = 0.25s, n = 4 => w = 1s
+The enemies need to travel 2 meters during this time, so they must have a velocity of v = 2 / n*f.																				// v = 2m/s
+The player is at y = 0 and the enemies spawn at y = y0, but the player can only really kill them within the first s0 = y0 - 1 meters.											// y0 = 5m => s0 = 4m
+It will take the enemies t0 = s0 / v = s0*n*f / 2 seconds to travel this distance.																								// t0 = 2s
+However, an enemy spawned in the second row in the initial burst only has s1 = s0 - 2 meters to travel, and t1 = s1 / v = (s0 - 2)*n*f / 2.										// s1 = 2m, t1 = 1s
+
+To comfortably fit more rows into the space, t1, t2, t3,... must be increased to reasonable numbers.
+Thus, If I assert the above formulae must hold, the only independent, non-constant variables are the player's firing rate, the enemy count and the starting y position of spawned enemies.
+If any of these parameters are increased, tn will increase with them.
+(Of course, tn won't LITERALLY increase if the interval between the player's shots or whatever increases, rather, the equations dictate that it OUGHT to increase because the velocity OUGHT to decrease because the enemy throughput OUGHT to decrease.)
+Changing the player's firing rate doesn't actually fix much, because although the absolute time it will the enemies to reach the player increases, the amount of shots (tn / f) one can fire within that time doesn't.
+The average amount of enemies per wave n is likely not a variable that should be arbitrarily changed either, leaving only the spawn y position.
+After all this,, I've found out that to fit more enemies on the screen, I can give them more space. amazing.*
+
+It's noteworthy that if the frontmost row spawned during the initial burst phase simply became the y0 in a scenario *without* that initial burst (so only one wave aon the screen at a time,) nothing would really differ.
+The only changes would be a) visuals or b) when projectile enemies are in the back.
+That is, if yPos (y0) is set to 9 and three initial waves spawn at 9, 7 and 5, after which continuous waves steadily trickle in, it's the same as if yPos was simply 5 and there were no initial waves whatsoever.
+All enemies would die at a y position between 3 and 5 - just below the 5 line, that is - either way.
+
+*) If expanding the game space turns out to be a problem because it makes the sliders appear smaller, they can be made relatively bigger than the players and enemies.
+   Whether this would actually realized by making the sliders absolutely bigger or by making the player and enemies, their velocities and the necessary distances between them smaller doesn't particularly matter.
+   The second option, however, would likely be easier to implement due to how the sliders currently work themselves.
+
+
+// calling these "chapters" is so fucking pretentious istg
+// ughh whatever
