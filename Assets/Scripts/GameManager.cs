@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     public int levelIndex = -1;
     Level[] levels = new Level[] { 
-        new(new int[] { 0, 0 }, 0)
+        new(new int[] { 0, 0 }, new int[] { 0, 1 }, 0)
     };
 
     public Level GetCurrentLevel()

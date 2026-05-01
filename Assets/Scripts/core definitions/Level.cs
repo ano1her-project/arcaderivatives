@@ -3,12 +3,13 @@ public class Level
     public int baseIntensity;
     public intmaxIntensity;*/
 
-    public int[] waveIntensities;
+    public int[] startWaveIntensities, continuousWaveIntensities;
     public int controlledDerivativeIndex;
 
-    public Level(int[] p_waveIntensities, int p_controlledDerivativeIndex)
+    public Level(int[] p_startWaveIntensities, int[] p_continuousWaveIntensities, int p_controlledDerivativeIndex)
     {
-        waveIntensities = p_waveIntensities;
+        startWaveIntensities = p_startWaveIntensities;
+        continuousWaveIntensities = p_continuousWaveIntensities;
         controlledDerivativeIndex = p_controlledDerivativeIndex;
     }
 }
