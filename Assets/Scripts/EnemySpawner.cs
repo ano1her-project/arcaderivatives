@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public Sprite bulletSprite;
     public Sprite unarmedSprite, cannonSprite, turretSprite;
 
-    // enemy pool: // waves built from enemies are hardcoded and not random, so there'd be no use for an array and i simply name them as separate variables.
+    // enemy pool: // waves built from enemies are hardcoded and not random, so there'd be no use for an array of enemies and i simply name them as separate variables.
     EnemyData unarmed, cannon, turret;
     // wave pool:  // levels built from waves, however, are built by picking waves from a set randomly, so there needs to be a pool array.
     EnemyWaveData[] wavePool;
@@ -22,26 +22,48 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         instance = this;
-        // dev info
-        float exampleSpeed = 2f / 3f;
-        Debug.Log($"a ship with speed {exampleSpeed}m/s will take {(yPos - 1) / exampleSpeed}s to reach the player and {yPos / exampleSpeed}s to reach the player-side bounds.");
         // enemy catalogue:
-        unarmed = new(unarmedSprite, null, 2f / 3f);
-        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 5f), 1f), 2f / 3f);
-        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 6f), 1f), 2f / 3f, true);
+        unarmed = new(unarmedSprite, null, 1f);
+        cannon = new(cannonSprite, new(new(bulletSprite, 0.25f, 8f), 2f), 1f);
+        turret = new(turretSprite, new(new(bulletSprite, 0.25f, 8f), 2f), 1f, true);
         // wave catalogue:
         wavePool = new EnemyWaveData[] {
-            new(unarmed.Repeat(3), Spacing.FromSetIncrement(3, 2f), 0),
-            new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 0),
-            new(unarmed.Repeat(5), Spacing.FromSetIncrement(5, 2f), 1),
+            new(unarmed.Repeat(2), Spacing.FromSetIncrement(2, 2f), 0),
+            new(unarmed.Repeat(2), Spacing.FromSetIncrement(2, 4f), 0),
+
+            new(unarmed.Repeat(3), Spacing.FromSetIncrement(3, 2f), 1),
+            new(unarmed.Repeat(3), Spacing.FromSetIncrement(3, 4f), 1),
+
+            new(cannon.And(unarmed.Repeat(2)), Spacing.FromSetIncrement(3, 2f), -1),
+            new(cannon.And(unarmed.Repeat(2)), Spacing.FromSetIncrement(3, 4f), -1),
+            new(unarmed.And(cannon).And(unarmed), Spacing.FromSetIncrement(3, 2f), -1),
+            new(unarmed.And(cannon).And(unarmed), Spacing.FromSetIncrement(3, 4f), -1),
+            new(unarmed.Repeat(2).And(cannon), Spacing.FromSetIncrement(3, 2f), -1),
+            new(unarmed.Repeat(2).And(cannon), Spacing.FromSetIncrement(3, 4f), -1),
+
+            new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 2f), 2),
+            new(unarmed.Repeat(4), Spacing.FromSetIncrement(4, 4f), 2),
+
+            new(cannon.And(unarmed.Repeat(3)), Spacing.FromSetIncrement(4, 2f), -2),
+            new(cannon.And(unarmed.Repeat(3)), Spacing.FromSetIncrement(4, 4f), -2),
+            new(unarmed.And(cannon).And(unarmed.Repeat(2)), Spacing.FromSetIncrement(4, 2f), -2),
+            new(unarmed.And(cannon).And(unarmed.Repeat(2)), Spacing.FromSetIncrement(4, 4f), -2),
+            new(unarmed.Repeat(2).And(cannon).And(unarmed), Spacing.FromSetIncrement(4, 2f), -2),
+            new(unarmed.Repeat(2).And(cannon).And(unarmed), Spacing.FromSetIncrement(4, 4f), -2),
+            new(unarmed.Repeat(3).And(cannon), Spacing.FromSetIncrement(4, 2f), -2),
+            new(unarmed.Repeat(3).And(cannon), Spacing.FromSetIncrement(4, 4f), -2),
         };
+        // dev info
+        float exampleSpeed = 1f;
+        Debug.Log($"a ship with speed {exampleSpeed}m/s will take {(yPos - 1) / exampleSpeed}s to reach the player and {yPos / exampleSpeed}s to reach the player-side bounds.");
     }
 
     Level level; // current level, cached for performance
-    EnemyWaveData? lastWave; // last as in previous
+    EnemyWaveData? previousWave; // the same wave mustn't appear twice in a row
     bool isInStartPhase;
-    int currentWave;
+    int currentWave; // index
     float scheduledWaveSpawn = float.MaxValue;
+    float firstStartWaveYPos;
 
     public void SpawnLevel()
     {
@@ -49,7 +71,8 @@ public class EnemySpawner : MonoBehaviour
         isInStartPhase = true;
         currentWave = 0;
         scheduledWaveSpawn = Time.time + intervalBetweenStartWaves;
-        lastWave = null;
+        previousWave = null;
+        firstStartWaveYPos = yPos - 2f * (level.startWaveIntensities.Length - 1);
     } 
 
     void Update()
@@ -58,21 +81,26 @@ public class EnemySpawner : MonoBehaviour
             return;
         if (!isInStartPhase && currentWave >= level.continuousWaveIntensities.Length)
             return;
-        int currentWaveIntensity = isInStartPhase ? level.startWaveIntensities[currentWave] : level.continuousWaveIntensities[currentWave]; 
+        int currentWaveIntensity = isInStartPhase ? 
+            level.startWaveIntensities[currentWave] : 
+            level.continuousWaveIntensities[currentWave]; 
         var wave = wavePool
             .Where(wave => wave.intensity == currentWaveIntensity
-            && (lastWave is null || wave != lastWave))
+            && (previousWave is null || wave != previousWave))
             .ToArray().ChooseRandom();
-        wave.Spawn(isInStartPhase ? 
-            yPos - (level.startWaveIntensities.Length - 1 - currentWave) * 2f : 
-            yPos);        
+        float currentYPos = isInStartPhase ?
+            firstStartWaveYPos + 2f * currentWave :
+            yPos;
+        wave.Spawn(currentYPos);  
         currentWave++;
         if (isInStartPhase && currentWave >= level.startWaveIntensities.Length)
         {
             isInStartPhase = false;
             currentWave = 0;
         }
-        lastWave = wave;
-        scheduledWaveSpawn += isInStartPhase ? intervalBetweenStartWaves : intervalBetweenContinuousWaves;
+        previousWave = wave;
+        scheduledWaveSpawn += isInStartPhase ? 
+            intervalBetweenStartWaves : 
+            intervalBetweenContinuousWaves;
     }
 }

@@ -15,11 +15,11 @@ Whether more are spawned later on is not as consquential.
 
 /// Chapter 2 (01.05.26)
 
-If the player can fire a shot every f seconds and a wave contains, on average, n enemies, waves should spawn every w = n*f seconds to be in equillibrium with the player.		// f = 0.25s, n = 4 => w = 1s
-The enemies need to travel 2 meters during this time, so they must have a velocity of v = 2 / n*f.																				// v = 2m/s
-The player is at y = 0 and the enemies spawn at y = y0, but the player can only really kill them within the first s0 = y0 - 1 meters.											// y0 = 5m => s0 = 4m
-It will take the enemies t0 = s0 / v = s0*n*f / 2 seconds to travel this distance.																								// t0 = 2s
-However, an enemy spawned in the second row in the initial burst only has s1 = s0 - 2 meters to travel, and t1 = s1 / v = (s0 - 2)*n*f / 2.										// s1 = 2m, t1 = 1s
+If the player can fire a shot every f seconds and a wave contains, on average, n enemies, waves should spawn every w = n*f seconds to be in equillibrium with the player.		// f = 0.25s, n = 4 => w = 1s	// f = 0.25s, n = 6 => w = 1.5s
+The enemies need to travel 2 meters during this time, so they must have a velocity of v = 2 / n*f.																				// v = 2m/s						// v = 1.333m/s
+The player is at y = 0 and the enemies spawn at y = y0, but the player can only really kill them within the first s0 = y0 - 1 meters.											// y0 = 5m => s0 = 4m			// y0 = 5m => s0 = 4m
+It will take the enemies t0 = s0 / v = s0*n*f / 2 seconds to travel this distance.																								// t0 = 2s						// t0 = 3s
+However, an enemy spawned in the second row in the initial burst only has s1 = s0 - 2 meters to travel, and t1 = s1 / v = (s0 - 2)*n*f / 2.										// s1 = 2m, t1 = 1s				// s1 = 2m, t1 = 1.5s
 
 To comfortably fit more rows into the space, t1, t2, t3,... must be increased to reasonable numbers.
 Thus, If I assert the above formulae must hold, the only independent, non-constant variables are the player's firing rate, the enemy count and the starting y position of spawned enemies.
@@ -29,8 +29,8 @@ Changing the player's firing rate doesn't actually fix much, because although th
 The average amount of enemies per wave n is likely not a variable that should be arbitrarily changed either, leaving only the spawn y position.
 After all this,, I've found out that to fit more enemies on the screen, I can give them more space. amazing.*
 
-It's noteworthy that if the frontmost row spawned during the initial burst phase simply became the y0 in a scenario *without* that initial burst (so only one wave aon the screen at a time,) nothing would really differ.
-The only changes would be a) visuals or b) when projectile enemies are in the back.
+It's noteworthy that if the frontmost row spawned during the initial burst phase simply became the y0 in a scenario *without* that initial burst (so only one wave on the screen at a time,) nothing would really differ.
+The only changes would be a) visual or b) when projectile enemies are in the back.
 That is, if yPos (y0) is set to 9 and three initial waves spawn at 9, 7 and 5, after which continuous waves steadily trickle in, it's the same as if yPos was simply 5 and there were no initial waves whatsoever.
 All enemies would die at a y position between 3 and 5 - just below the 5 line, that is - either way.
 

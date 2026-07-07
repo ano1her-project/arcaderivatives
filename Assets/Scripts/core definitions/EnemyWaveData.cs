@@ -6,7 +6,7 @@ public class EnemyWaveData
     public EnemyData[] enemies;
     public float[] xs;
     //
-    public int intensity;
+    public int intensity; // positive = shield-type; negative = shoot-type
 
     public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs, int p_intensity)
     {
@@ -15,6 +15,7 @@ public class EnemyWaveData
         intensity = p_intensity;
     }
 
+    // not sure if these are ever gonna get used but i already wrote em sooo
     public static EnemyWaveData FromEnemyAmongFiller(EnemyData enemy, EnemyData filler, float[] xs, int intensity)
     {
         EnemyData[] enemies = new EnemyData[xs.Length];
@@ -48,6 +49,7 @@ public class EnemyWaveData
         }
         return new(enemies, xs, intensity);
     }
+    // end of that block
 
     public GameObject[] Spawn(float yPos)
     {        

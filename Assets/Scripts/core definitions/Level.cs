@@ -1,8 +1,5 @@
 public class Level
-{/*
-    public int baseIntensity;
-    public intmaxIntensity;*/
-
+{
     public int[] startWaveIntensities, continuousWaveIntensities;
     public int controlledDerivativeIndex;
 
