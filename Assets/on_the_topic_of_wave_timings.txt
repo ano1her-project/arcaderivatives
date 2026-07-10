@@ -38,6 +38,14 @@ All enemies would die at a y position between 3 and 5 - just below the 5 line, t
    Whether this would actually realized by making the sliders absolutely bigger or by making the player and enemies, their velocities and the necessary distances between them smaller doesn't particularly matter.
    The second option, however, would likely be easier to implement due to how the sliders currently work themselves.
 
+/// Chapter 3 (10.07.26)
 
-// calling these "chapters" is so fucking pretentious istg
-// ughh whatever
+lets go write some bullshiittt
+The level design I have had in mind up until now consisted of many small, one-hit-kill enemies. Very space-invaders-y.
+That's going out the window.
+Levels should be less densely populated by enemies, while, on the other hand, introducing heavier, mid-size enemies that can take e.g. three hits to kill.
+Also, formations - do focus on that.
+
+What this means specifically for the code, off the top of my head, is:
+- Level intensities removed, levels will have arrays of waves.
+- Add y-axis offset information to enemy spacing, probably with a "placements" array of 2D vectors.
