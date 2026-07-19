@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int currentLevelIndex = -1;
-    readonly int[] controlledDerivativeIndexes = new int[] {0};
 
     void Start()
     {
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     void NextLevel()
     {
         currentLevelIndex++;
-        DerivativeCalculator.instance.SetControlledDerivative(controlledDerivativeIndexes[currentLevelIndex], true);
+        DerivativeCalculator.instance.SetControlledDerivative(Catalog.instance.levels[currentLevelIndex].controlledDerivativeIndex, true);
         EnemySpawner.instance.SpawnLevel(currentLevelIndex);
     }
 }

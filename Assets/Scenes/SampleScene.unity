@@ -715,6 +715,7 @@ GameObject:
   - component: {fileID: 1220258485}
   - component: {fileID: 1220258486}
   - component: {fileID: 1220258487}
+  - component: {fileID: 1220258489}
   m_Layer: 0
   m_Name: ScriptHoarder
   m_TagString: Untagged
@@ -807,10 +808,6 @@ MonoBehaviour:
   xBounds: 9
   intervalBetweenStartWaves: 0.2
   intervalBetweenMainWaves: 1
-  bulletSprite: {fileID: 21300000, guid: 66773b897024bcb40b095c0ef0068ee5, type: 3}
-  unarmedSprite: {fileID: 21300000, guid: 25bdd3a02a64d73478647a9f39956fe1, type: 3}
-  cannonSprite: {fileID: 21300000, guid: 96d86580350222d49bd0ef2c5a231150, type: 3}
-  turretSprite: {fileID: 21300000, guid: 1e3bc73fe9d9adf4082768c56499a0a3, type: 3}
 --- !u!114 &1220258488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +821,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelIndex: -1
+--- !u!114 &1220258489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220258482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c61f7e8d276ffe4a989437e3b4c5dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSprite: {fileID: 21300000, guid: 66773b897024bcb40b095c0ef0068ee5, type: 3}
+  unarmedSprite: {fileID: 21300000, guid: 25bdd3a02a64d73478647a9f39956fe1, type: 3}
+  cannonSprite: {fileID: 21300000, guid: 96d86580350222d49bd0ef2c5a231150, type: 3}
+  turretSprite: {fileID: 21300000, guid: 1e3bc73fe9d9adf4082768c56499a0a3, type: 3}
 --- !u!1 &1681391921
 GameObject:
   m_ObjectHideFlags: 0
