@@ -1,55 +1,37 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyWaveData
 {
     public EnemyData[] enemies;
     public float[] xs;
-    //
-    public int intensity; // positive = shield-type; negative = shoot-type
 
-    public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs, int p_intensity)
+    public EnemyWaveData(EnemyData[] p_enemies)
+    {
+        enemies = p_enemies;
+    }
+
+    public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs)
     {
         enemies = p_enemies;
         xs = p_xs;
-        intensity = p_intensity;
     }
 
-    // not sure if these are ever gonna get used but i already wrote em sooo
-    public static EnemyWaveData FromEnemyAmongFiller(EnemyData enemy, EnemyData filler, float[] xs, int intensity)
+    public EnemyWaveData SpacingFromSetIncrement(float increment)
     {
-        EnemyData[] enemies = new EnemyData[xs.Length];
-        enemies[Random.Range(0, xs.Length)] = enemy; // the one non-filler enemy
+        float[] xs = new float[enemies.Length];
+        float x = -((xs.Length - 1) * increment) / 2f;
         for (int i = 0; i < xs.Length; i++)
         {
-            if (enemies[i] is null)
-                enemies[i] = filler;
+            xs[i] = x;
+            x += increment;
         }
-        return new(enemies, xs, intensity);
+        return new(enemies, xs);
     }
 
-    public static EnemyWaveData FromEnemiesAmongFiller(EnemyData[] nonFillerEnemies, EnemyData filler, float[] xs, int intensity)
-    {
-        EnemyData[] enemies = new EnemyData[xs.Length];
-        List<int> vacantIndexes = new();
-        for (int i = 0; i < xs.Length; i++) // fill up vacantIndexes with numbers from 0 to n
-            vacantIndexes.Add(i);
-        // place non filler enemies
-        for (int e = 0; e < nonFillerEnemies.Length; e++)
-        {
-            int i = Random.Range(0, vacantIndexes.Count);
-            enemies[i] = nonFillerEnemies[e];
-            vacantIndexes.RemoveAt(i);
-        }
-        // fill all other spots with filler
-        for (int i = 0; i < xs.Length; i++) // using whatever's still left in vacantIndexes here is probably possible but feels more expensive, idk
-        {
-            if (enemies[i] is null)
-                enemies[i] = filler;
-        }
-        return new(enemies, xs, intensity);
-    }
-    // end of that block
+    public EnemyWaveData OffsetX(float offset)
+        => new(enemies, xs.Select(x => x + offset).ToArray());
 
     public GameObject[] Spawn(float yPos)
     {        

@@ -1,12 +1,10 @@
 public class Level
 {
-    public int[] startWaveIntensities, continuousWaveIntensities;
-    public int controlledDerivativeIndex;
+    public EnemyWaveData[] startWaves, mainWaves;
 
-    public Level(int[] p_startWaveIntensities, int[] p_continuousWaveIntensities, int p_controlledDerivativeIndex)
+    public Level(EnemyWaveData[] p_startWaves, EnemyWaveData[] p_mainWaves)
     {
-        startWaveIntensities = p_startWaveIntensities;
-        continuousWaveIntensities = p_continuousWaveIntensities;
-        controlledDerivativeIndex = p_controlledDerivativeIndex;
+        startWaves = p_startWaves;
+        mainWaves = p_mainWaves;
     }
 }

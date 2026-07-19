@@ -4,13 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int levelIndex = -1;
-    Level[] levels = new Level[] { 
-        new(new int[] { 0, 1, 1 }, new int[] { -1, 1, -1 }, 0)
-    };
-
-    public Level GetCurrentLevel()
-        => levels[levelIndex];
+    public int currentLevelIndex = -1;
+    readonly int[] controlledDerivativeIndexes = new int[] {0};
 
     void Start()
     {
@@ -23,19 +18,19 @@ public class GameManager : MonoBehaviour
     {
         if (!firstUpdate)
             return;
-        FirstUpdate();
-        firstUpdate = false;
+        FirstUpdate();        
     }
 
     void FirstUpdate()
     {
         NextLevel();
+        firstUpdate = false;
     }
 
     void NextLevel()
     {
-        levelIndex++;
-        DerivativeCalculator.instance.SetControlledDerivative(GetCurrentLevel().controlledDerivativeIndex, true);
-        EnemySpawner.instance.SpawnLevel();
+        currentLevelIndex++;
+        DerivativeCalculator.instance.SetControlledDerivative(controlledDerivativeIndexes[currentLevelIndex], true);
+        EnemySpawner.instance.SpawnLevel(currentLevelIndex);
     }
 }
