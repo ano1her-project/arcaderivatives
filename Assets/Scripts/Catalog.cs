@@ -26,25 +26,30 @@ public class Catalog : MonoBehaviour
         // levels:
         levels = new Level[] {
             new(new EnemyWaveData[] {
-                u,
-                u,
-                u_u},
+                    u,
+                    u,
+                    u_u},
                 new EnemyWaveData[] {
-                u.OffsetX(-5f),
-                u.OffsetX(5f),
-                u_u.OffsetX(-5f),
-                u_u.OffsetX(5f),
-                u_u.OffsetX(-5f),
-                u_u.OffsetX(5f),
-                u_u,
-                u_u,
-                u_u}, 0),
+                    u.OffsetX(-5f),
+                    u.OffsetX(5f),
+                    u_u.OffsetX(-5f),
+                    u_u.OffsetX(5f),
+                    u_u.OffsetX(-5f),
+                    u_u.OffsetX(5f),
+                    u_u,
+                    u_u,
+                    u_u}, 0),
             new(new EnemyWaveData[] {
-                u_______u,
-                u_______u,
-                u_______u},
+                    u_______u,
+                    u_______u,
+                    u_______u},
                 new EnemyWaveData[] {
-
+                    u_____u,
+                    u___u,
+                    u_u,
+                    u_u,
+                    u_u
+                
                 }, 0)
         };
     }

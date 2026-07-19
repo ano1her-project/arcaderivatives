@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class EnemySpawner : MonoBehaviour
     bool isInStartPhase;
     int currentWaveIndex;
     float scheduledWaveSpawn = float.MaxValue;
-    float firstStartWaveYPos;
+    float currentYPos;
+    public List<GameObject> spawnedEnemies;
 
     public void SpawnLevel(int levelIndex)
     {
@@ -27,28 +29,30 @@ public class EnemySpawner : MonoBehaviour
         isInStartPhase = true;
         currentWaveIndex = 0;
         scheduledWaveSpawn = Time.time + intervalBetweenStartWaves;
-        firstStartWaveYPos = yPos - 2f * (level.startWaves.Length - 1);
+        currentYPos = yPos - 2f * (level.startWaves.Length - 1);
     } 
 
     void Update()
     {
         if (Time.time < scheduledWaveSpawn)
             return;
-        if (!isInStartPhase && currentWaveIndex >= level.mainWaves.Length)
+        if (AllWavesSpawned())
             return;
-        var wave = isInStartPhase ? level.startWaves[currentWaveIndex] : level.mainWaves[currentWaveIndex];
-        float currentYPos = isInStartPhase ?
-            firstStartWaveYPos + 2f * currentWaveIndex :
-            yPos;
-        wave.Spawn(currentYPos);
+        var wave = isInStartPhase ? level.startWaves[currentWaveIndex] : level.mainWaves[currentWaveIndex];        
+        spawnedEnemies.AddRange(wave.Spawn(currentYPos));        
         currentWaveIndex++;
         if (isInStartPhase && currentWaveIndex >= level.startWaves.Length)
         {
             isInStartPhase = false;
             currentWaveIndex = 0;
         }
+        if (isInStartPhase)
+            currentYPos += 2f;
         scheduledWaveSpawn += isInStartPhase ? 
             intervalBetweenStartWaves : 
             intervalBetweenMainWaves;
     }
+
+    public bool AllWavesSpawned()
+        => !isInStartPhase && currentWaveIndex >= level.mainWaves.Length;
 }

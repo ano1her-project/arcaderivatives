@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
@@ -18,7 +19,7 @@ public class HealthHandler : MonoBehaviour
     {
         if (other.CompareTag(gameObject.tag))
             return;
-        if (!other.TryGetComponent<HealthHandler>(out _))
+        if (!other.TryGetComponent<HealthHandler>(out _))  // ..then it's a bullet.
             Destroy(other.gameObject);
         TakeDamage();
     }
@@ -27,6 +28,9 @@ public class HealthHandler : MonoBehaviour
     {
         lives--;
         if (lives <= 0)
-            Destroy(gameObject);
+        {
+            GameManager.instance.OnShipDeath(gameObject.CompareTag("Enemy"));
+            Destroy(gameObject);            
+        }
     }
 }
