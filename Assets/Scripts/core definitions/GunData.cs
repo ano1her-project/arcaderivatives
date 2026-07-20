@@ -1,7 +1,7 @@
-public class GunData
+public readonly struct GunData
 {
-    public BulletData bullet;
-    public float interval;
+    public readonly BulletData bullet;
+    public readonly float interval;
 
     public GunData(BulletData p_bullet, float p_interval)
     {

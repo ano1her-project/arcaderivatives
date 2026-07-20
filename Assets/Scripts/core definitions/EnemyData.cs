@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 
-public class EnemyData
+public readonly struct EnemyData
 {
     public static GameObject prefab;
 
-    public Sprite sprite;
-    public GunData? gun;
-    public float velocity;
-    public bool aimsAtPlayer;
-    public int linkedDerivative; // -1 if none
+    public readonly Sprite sprite;
+    public readonly GunData? gun;
+    public readonly float velocity;
+    public readonly bool aimsAtPlayer;
+    public readonly int linkedDerivative; // -1 if none
 
     public EnemyData(Sprite p_sprite, GunData? p_gun, float p_velocity, bool p_aimsAtPlayer, int p_linkedDerivative)
     {
@@ -31,7 +31,7 @@ public class EnemyData
         inst.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * velocity;
         // individual components
         if (gun is not null)
-            inst.AddComponent<AutoGun>().data = gun;
+            inst.AddComponent<AutoGun>().data = (GunData)gun;
         if (aimsAtPlayer)
             inst.AddComponent<AimAtPlayer>();
         if (linkedDerivative != -1)

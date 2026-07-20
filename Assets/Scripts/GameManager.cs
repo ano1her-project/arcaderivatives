@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public float waitBetweenLevels;
     public int currentLevelIndex = -1;
 
     void Start()
@@ -12,23 +13,18 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    bool firstUpdate = true;
     bool onEnemyDeathUpdate = false;
     bool onPlayerDeathUpdate = false;
+    float scheduledNextLevelStart = 0f;
 
     void Update()
     {
-        if (firstUpdate)
-            FirstUpdate();
         if (onEnemyDeathUpdate)
             UpdateAfterEnemyDeath();
-    }
-
-    void FirstUpdate()
-    {
-        firstUpdate = false;
+        if (Time.time < scheduledNextLevelStart)
+            return;
+        scheduledNextLevelStart = float.PositiveInfinity;
         StartNextLevel();
-        
     }
 
     void StartNextLevel()
@@ -59,6 +55,6 @@ public class GameManager : MonoBehaviour
                 aliveEnemyCount++;
         }
         if (aliveEnemyCount == 0)
-            StartNextLevel(); // all waves have been spawned AND all enemies are dead, start the next level        
+            scheduledNextLevelStart = Time.time + waitBetweenLevels; // all waves have been spawned AND all enemies are dead, start the next level        
     }
 }

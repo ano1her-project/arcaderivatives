@@ -48,8 +48,7 @@ public class Catalog : MonoBehaviour
                     u___u,
                     u_u,
                     u_u,
-                    u_u
-                
+                    u_u                
                 }, 0)
         };
     }

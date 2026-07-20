@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class BulletData
+public readonly struct BulletData
 {
     public static GameObject prefab;
 
-    public Sprite sprite;
-    public float hitboxRadius;
-    public float speed;
+    public readonly Sprite sprite;
+    public readonly float hitboxRadius;
+    public readonly float speed;
 
     public BulletData(Sprite p_sprite, float p_hitboxRadius, float p_speed)
     {

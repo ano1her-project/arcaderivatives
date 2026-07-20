@@ -1,15 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyWaveData
+public readonly struct EnemyWaveData
 {
-    public EnemyData[] enemies;
-    public float[] xs;
+    public readonly EnemyData[] enemies;
+    public readonly float[] xs;
 
     public EnemyWaveData(EnemyData[] p_enemies)
     {
         enemies = p_enemies;
+        xs = Array.Empty<float>();
     }
 
     public EnemyWaveData(EnemyData[] p_enemies, float[] p_xs)

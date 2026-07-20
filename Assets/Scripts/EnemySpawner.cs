@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     Level level; // current level, cached for performance
     bool isInStartPhase;
     int currentWaveIndex;
-    float scheduledWaveSpawn = float.MaxValue;
+    float scheduledWaveSpawn = float.PositiveInfinity;
     float currentYPos;
     public List<GameObject> spawnedEnemies;
 
