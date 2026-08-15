@@ -35,6 +35,19 @@ public readonly struct EnemyWaveData
     public EnemyWaveData OffsetX(float offset)
         => new(enemies, xs.Select(x => x + offset).ToArray());
 
+    public EnemyWaveData Shuffle()
+    {
+        List<EnemyData> enemyPool = enemies.ToList();
+        EnemyData[] newEnemies = new EnemyData[enemies.Length];
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            int rolledEnemyIndex = UnityEngine.Random.Range(0, enemyPool.Count);
+            newEnemies[i] = enemyPool[rolledEnemyIndex];
+            enemyPool.RemoveAt(rolledEnemyIndex);
+        }
+        return new(newEnemies, xs);
+    }
+
     public GameObject[] Spawn(float yPos)
     {        
         if (enemies.Length != xs.Length)

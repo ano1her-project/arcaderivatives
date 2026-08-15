@@ -30,8 +30,8 @@ public class Catalog : MonoBehaviour
                     u,
                     u_u},
                 new EnemyWaveData[] {
-                    u.OffsetX(-5f),
-                    u.OffsetX(5f),
+                    u.OffsetX(-4f),
+                    u.OffsetX(4f),
                     u_u.OffsetX(-5f),
                     u_u.OffsetX(5f),
                     u_u.OffsetX(-5f),
